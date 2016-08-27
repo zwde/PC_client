@@ -103,6 +103,10 @@ namespace PC_Client1
         }
         private void btn_Device_Configuration_Click(object sender, RoutedEventArgs e)
         {
+            Grid_Global_Settings.Visibility = (Visibility)0;
+            Grid_Tx_stage.Visibility = (Visibility)2;
+            Grid_Rx_Stage.Visibility = (Visibility)2;
+            Grid_Timing_Controls.Visibility = (Visibility)2;
             Grid_Device_Configuration.Visibility = (Visibility)0;
             Grid_ADC_Capture_Analysis.Visibility = (Visibility)2;
             Grid_Setting.Visibility = (Visibility)2;
@@ -1364,7 +1368,7 @@ namespace PC_Client1
         private void btn_connect_Click(object sender, RoutedEventArgs e)
         {
             int[] IntBdrs = { 9600,115200,230400 };
-            string[] CommNums = { "COM1", "COM2", "COM3", "COM4" };
+            string[] CommNums = { "COM1", "COM2", "COM3", "COM4","COM5","COM6","COM7","COM8" };
             int num;
             num = ComBox_CommNum.SelectedIndex;
             CommNum = CommNums[num];
@@ -2250,6 +2254,8 @@ namespace PC_Client1
                 }
                 TextBox_resultA1.Text = (float.Parse(TextBox_DevA1.Text) / float.Parse(TextBox_DevB1.Text)).ToString();
                 TextBox_resultB1.Text = (float.Parse(TextBox_DevB1.Text) / float.Parse(TextBox_DevA1.Text)).ToString();
+                lnAB1.Text = Math.Log(double.Parse(TextBox_resultA1.Text)).ToString();
+                lnBA1.Text = Math.Log(double.Parse(TextBox_resultB1.Text)).ToString();
             }
             catch 
             {
@@ -2310,6 +2316,8 @@ namespace PC_Client1
                 }
                 TextBox_resultA2.Text = (float.Parse(TextBox_DevA2.Text) / float.Parse(TextBox_DevB2.Text)).ToString();
                 TextBox_resultB2.Text = (float.Parse(TextBox_DevB2.Text) / float.Parse(TextBox_DevA2.Text)).ToString();
+                lnAB2.Text = Math.Log(double.Parse(TextBox_resultA2.Text)).ToString();
+                lnBA2.Text = Math.Log(double.Parse(TextBox_resultB2.Text)).ToString();
             }
             catch 
             {
@@ -2370,6 +2378,8 @@ namespace PC_Client1
                 }
                 TextBox_resultA3.Text = (float.Parse(TextBox_DevA3.Text) / float.Parse(TextBox_DevB3.Text)).ToString();
                 TextBox_resultB3.Text = (float.Parse(TextBox_DevB3.Text) / float.Parse(TextBox_DevA3.Text)).ToString();
+                lnAB3.Text = Math.Log(double.Parse(TextBox_resultA3.Text)).ToString();
+                lnBA3.Text = Math.Log(double.Parse(TextBox_resultB3.Text)).ToString();
             }
             catch
             {
@@ -2430,6 +2440,8 @@ namespace PC_Client1
                 }
                 TextBox_resultA4.Text = (float.Parse(TextBox_DevA4.Text) / float.Parse(TextBox_DevB4.Text)).ToString();
                 TextBox_resultB4.Text = (float.Parse(TextBox_DevB4.Text) / float.Parse(TextBox_DevA4.Text)).ToString();
+                lnAB4.Text = Math.Log(double.Parse(TextBox_resultA4.Text)).ToString();
+                lnBA4.Text = Math.Log(double.Parse(TextBox_resultB4.Text)).ToString();
             }
             catch 
             {
@@ -2490,6 +2502,8 @@ namespace PC_Client1
                 }
                 TextBox_resultA5.Text = (float.Parse(TextBox_DevA5.Text) / float.Parse(TextBox_DevB5.Text)).ToString();
                 TextBox_resultB5.Text = (float.Parse(TextBox_DevB5.Text) / float.Parse(TextBox_DevA5.Text)).ToString();
+                lnAB5.Text = Math.Log(double.Parse(TextBox_resultA5.Text)).ToString();
+                lnBA5.Text = Math.Log(double.Parse(TextBox_resultB5.Text)).ToString();
             }
             catch
             {
@@ -2550,6 +2564,8 @@ namespace PC_Client1
                 }
                 TextBox_resultA6.Text = (float.Parse(TextBox_DevA6.Text) / float.Parse(TextBox_DevB6.Text)).ToString();
                 TextBox_resultB6.Text = (float.Parse(TextBox_DevB6.Text) / float.Parse(TextBox_DevA6.Text)).ToString();
+                lnAB6.Text = Math.Log(double.Parse(TextBox_resultA6.Text)).ToString();
+                lnBA6.Text = Math.Log(double.Parse(TextBox_resultB6.Text)).ToString();
             }
             catch 
             {
@@ -2561,34 +2577,58 @@ namespace PC_Client1
         {
             try
             {
-                if(TextBox_k1.Text.Length<3 || TextBox_k2.Text.Length<3 || TextBox_c1.Text.Length<3 || TextBox_c2.Text.Length<3){
-                    MessageBox.Show("长度应为3");
+                if(TextBox_k1.Text.Length<5 || TextBox_k2.Text.Length<3 || TextBox_c1.Text.Length<5 || TextBox_c2.Text.Length<3){
+                    MessageBox.Show("位数错误");
                     return;
                 }
                 SerialPort port = new SerialPort(CommNum, IntBdr, Parity.None, 8);
-                Byte[] Data_save = new Byte[17];
-                Data_save[0] = 0x13; Data_save[1] = 0x12; Data_save[15] = 0x15; Data_save[16] = 0x0D;
+                Byte[] Data_save = new Byte[21];
+                Data_save[0] = 0x13; Data_save[1] = 0x12; Data_save[19] = 0x15; Data_save[20] = 0x0D;
                 if (ComBox_Add_Sel.SelectedIndex == 0)
                 {
-                    Data_save[14] = 0x31;
+                    Data_save[18] = 0x30;
                 }
-                else
+                else if (ComBox_Add_Sel.SelectedIndex == 1)
                 {
-                    Data_save[14] = 0x30;
+                    Data_save[18] = 0x31;
+                }
+                else if (ComBox_Add_Sel.SelectedIndex == 2)
+                {
+                    Data_save[18] = 0x32;
+                }
+                else if (ComBox_Add_Sel.SelectedIndex == 3)
+                {
+                    Data_save[18] = 0x33;
                 }
                 string str = TextBox_k1.Text;
-                Data_save[2]=(Byte)chan(str[0]);Data_save[3]=(Byte)chan(str[1]);Data_save[4]=(Byte)chan(str[2]);
+                if (str[0] == '+')
+                {
+                    Data_save[2] = 0x2B;
+                }
+                else if (str[0] == '-')
+                {
+                    Data_save[2] = 0x2D;
+                }
+                Data_save[3] = (Byte)chan(str[1]); Data_save[4] = (Byte)chan(str[2]); Data_save[5] = (Byte)chan(str[3]); Data_save[6] = (Byte)chan(str[4]);
                 str = TextBox_k2.Text;
-                Data_save[5] = (Byte)chan(str[0]); Data_save[6] = (Byte)chan(str[1]); Data_save[7] = (Byte)chan(str[2]);
+                Data_save[7] = (Byte)chan(str[0]); Data_save[8] = (Byte)chan(str[1]); Data_save[9] = (Byte)chan(str[2]);
                 str = TextBox_c1.Text;
-                Data_save[8] = (Byte)chan(str[0]); Data_save[9] = (Byte)chan(str[1]); Data_save[10] = (Byte)chan(str[2]);
+                if (str[0] == '+')
+                {
+                    Data_save[10] = 0x2B;
+                }
+                else if (str[0] == '-')
+                {
+                    Data_save[10] = 0x2D;
+                }
+                Data_save[11] = (Byte)chan(str[1]); Data_save[12] = (Byte)chan(str[2]); Data_save[13] = (Byte)chan(str[3]); Data_save[14] = (Byte)chan(str[4]);
                 str = TextBox_c2.Text;
-                Data_save[11] = (Byte)chan(str[0]); Data_save[12] = (Byte)chan(str[1]); Data_save[13] = (Byte)chan(str[2]);
+                Data_save[15] = (Byte)chan(str[0]); Data_save[16] = (Byte)chan(str[1]); Data_save[17] = (Byte)chan(str[2]);
               
                 if (!port.IsOpen)
                 {
                         port.Open();
-                        port.Write(Data_save, 0, 17);
+                        port.Write(Data_save, 0, 21);
                         Thread.Sleep(30);
                         port.Close();
                         MessageBox.Show("success");

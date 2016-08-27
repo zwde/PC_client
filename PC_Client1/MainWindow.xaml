@@ -6,7 +6,7 @@
         <Button Content="Device Configuration" Height="25" HorizontalAlignment="Left" Margin="0,0,0,0" Name="button1" VerticalAlignment="Top" Width="333" Click="btn_Device_Configuration_Click" />
         <Button Content="ADC Capture  Analysis" Height="25" HorizontalAlignment="Left" Margin="333,0,0,0" Name="button2" VerticalAlignment="Top" Width="333" Click="btn_ADC_Capture_Analysis_Click" />
         <Button Content="出厂设置" Height="25" HorizontalAlignment="Left" Margin="666,0,0,0" Name="button3" VerticalAlignment="Top" Width="333" Click="Setting_Click" />
-        <Grid x:Name="Grid_Device_Configuration" Height="690" Width="1000" VerticalAlignment="Top" Margin="0,25,0,0" Visibility="Collapsed">
+        <Grid x:Name="Grid_Device_Configuration" Height="690" Width="1000" VerticalAlignment="Top" Margin="0,25,0,0" >
             <Grid Margin="0,0,0,0" >
                 <Button Content="Global Settings" Width="250" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,0,0" Click="Btn_Global_Settings_Click"></Button>
                 <Button Content="Tx Stage" Width="250" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left"  Margin="250,0,0,0" Click="Btn_Tx_stage_Click"></Button>
@@ -25,6 +25,10 @@
                                 <ComboBoxItem>COM2</ComboBoxItem>
                                 <ComboBoxItem>COM3</ComboBoxItem>
                                 <ComboBoxItem>COM4</ComboBoxItem>
+                                <ComboBoxItem>COM5</ComboBoxItem>
+                                <ComboBoxItem>COM6</ComboBoxItem>
+                                <ComboBoxItem>COM7</ComboBoxItem>
+                                <ComboBoxItem>COM8</ComboBoxItem>
                             </ComboBox>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal"  Height="30" Width="130" Margin="567,54,251,14">
@@ -126,7 +130,7 @@
                 <Button Width="150" Height="30" Content="Diagnostic Enable" Click="Btn_Diagnostic" Margin="568,438,282,202"></Button>
               
             </Grid>
-            <Grid x:Name="Grid_Tx_stage" Width="1000" Height="670" Margin="0,25,0,0"  >
+            <Grid x:Name="Grid_Tx_stage" Width="1000" Height="670" Margin="0,25,0,0" Visibility="Collapsed" >
                 <Image x:Name="Whole_image" Source="image\Tx.jpg" Stretch="Fill"></Image>
                 <Grid Width="28" Height="75" Margin="275,181,697,414" Visibility="Collapsed" x:Name="image_Active1">
                     <Image Source="image\Active1.png" Stretch="Fill"></Image>
@@ -521,7 +525,7 @@
                 <Button Width="150" Height="25" Content="Load From File" Margin="689,485,161,160" Click="Btn_LoadFile"></Button>
             </Grid>
         </Grid>
-        <Grid x:Name="Grid_ADC_Capture_Analysis" Height="690" Width="1000" VerticalAlignment="Top" Margin="0,50,0,0" >
+        <Grid x:Name="Grid_ADC_Capture_Analysis" Height="690" Width="1000" VerticalAlignment="Top" Margin="0,50,0,0" Visibility="Collapsed">
             <Grid>
                 <ComboBox Width="80" Height="25" SelectedIndex="0" HorizontalContentAlignment="Center" x:Name="Dev_Select" Margin="54,12,866,653" SelectionChanged="Dev_Select_SelectionChanged">
                     <ComboBoxItem>探测器A</ComboBoxItem>
@@ -723,13 +727,13 @@
             </StackPanel>
             <Button Width="100" Height="27" Content="保存" x:Name="Save_kc" Click="Save_kc_Click" Margin="842,581,58,82" ></Button>
         </Grid>
-        <Grid x:Name="Grid_Setting" Height="690" Width="1000" VerticalAlignment="Top" Margin="0,25,0,0" Visibility="Collapsed" >
+        <Grid x:Name="Grid_Setting" Height="690" Width="1000" VerticalAlignment="Top" Margin="0,25,0,0"  Visibility="Collapsed">
             <Grid Margin="0,0,0,0">
                 <Button Content="参数设置" Width="333" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,0,0" x:Name="Btn_Data_setting" Click="Btn_Data_setting_Click"></Button>
                 <Button Content="样品测试" Width="333" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left"  Margin="333,0,0,0"  x:Name="Btn_Sample_Test" Click="Btn_Sample_Test_Click"></Button>
                 <Button Content="蓝牙通讯" Width="333" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left"  Margin="666,0,0,0"  x:Name="Btn_Bluetooth" Click="Btn_Bluetooth_Click"></Button>
             </Grid>
-            <Grid x:Name="Grid_Data_setting" Width="1000" Height="670" Margin="0,25,0,-5"   >
+            <Grid x:Name="Grid_Data_setting" Width="1000" Height="670" Margin="0,25,0,-5"   Visibility="Collapsed">
                 <StackPanel Orientation="Horizontal" Width="290" Height="30" Margin="56,16,654,624">
                     <Label Width="58" Height="25" Margin="0,0,10,0">仪器编号</Label>
                     <TextBox Width="130" Height="23" x:Name="Instrument_number" Margin="0,0,10,0" MaxLength="13"></TextBox>
@@ -779,110 +783,124 @@
                 <Button Content="保存" Width="80" Height="22" x:Name="Btn_save_DataSet" Click="Btn_save_DataSet_Click" Margin="91,275,829,373"></Button>
             </Grid>
             <Grid x:Name="Grid_Sample_Test" Width="1000" Height="670" Margin="0,25,0,-5" Visibility="Collapsed">
-                <StackPanel Orientation="Horizontal" Height="30" Margin="53,29,-53,611">
-                    <Label Margin="0,0,60,0">标样编号</Label>
-                    <Label Margin="0,0,80,0">选择</Label>
-                    <Label Margin="0,0,70,0">标样浓度</Label>
-                    <Label Margin="0,0,70,0">探测器A</Label>
-                    <Label Margin="0,0,75,0">探测器B</Label>
-                    <Label Margin="0,0,90,0">A/B</Label>
+                <StackPanel Orientation="Horizontal" Height="30" Margin="25,29,-25,611">
+                    <Label Margin="0,0,40,0">标样编号</Label>
+                    <Label Margin="0,0,50,0">选择</Label>
+                    <Label Margin="0,0,50,0">标样浓度</Label>
+                    <Label Margin="0,0,50,0">探测器A</Label>
+                    <Label Margin="0,0,50,0">探测器B</Label>
+                    <Label Margin="0,0,75,0">A/B</Label>
                     <Label Margin="0,0,70,0">B/A</Label>
+                    <Label Margin="0,0,40,0">ln(A/B)</Label>
+                    <Label Margin="0,0,70,0">ln(B/A)</Label>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" Height="30" Margin="83,64,-83,576">
-                    <Label Margin="0,0,40,0">1</Label>
-                    <ComboBox Width="100" Height="22" HorizontalContentAlignment="Center" SelectedIndex="0" Margin="0,0,47,0" x:Name="ComBox_LED1">
+                <StackPanel Orientation="Horizontal" Height="30" Margin="25,64,-25,576">
+                    <Label Margin="0,0,50,0">1</Label>
+                    <ComboBox Width="100" Height="22" HorizontalContentAlignment="Center" SelectedIndex="0" Margin="0,0,20,0" x:Name="ComBox_LED1">
                         <ComboBoxItem>LED1</ComboBoxItem>
                         <ComboBoxItem>LED2</ComboBoxItem>
                         <ComboBoxItem>LED1-ALED1</ComboBoxItem>
                         <ComboBoxItem>LED2-ALED2</ComboBoxItem>
                     </ComboBox>
-                    <TextBox Width="80" Height="22" Margin="0,0,47,0" x:Name="TextBox_nongdu1"></TextBox>
-                    <TextBox Width="80" Height="22" Margin="0,0,45,0" x:Name="TextBox_DevA1"></TextBox>
-                    <TextBox Width="80" Height="22" Margin="0,0,42,0" x:Name="TextBox_DevB1"></TextBox>
-                    <TextBox Width="80" Height="22" Margin="0,0,45,0" x:Name="TextBox_resultA1"></TextBox>
-                    <TextBox Width="80" Height="22" Margin="0,0,30,0" x:Name="TextBox_resultB1"></TextBox>
-                    <Button Content="测试" Width="80" Height="23" x:Name="Btntest1" Click="Btntest1_Click"></Button>
+                    <TextBox Width="80" Height="22" Margin="0,0,22,0" x:Name="TextBox_nongdu1"></TextBox>
+                    <TextBox Width="80" Height="22" Margin="0,0,22,0" x:Name="TextBox_DevA1"></TextBox>
+                    <TextBox Width="80" Height="22" Margin="0,0,22,0" x:Name="TextBox_DevB1"></TextBox>
+                    <TextBox Width="80" Height="22" Margin="0,0,22,0" x:Name="TextBox_resultA1"></TextBox>
+                    <TextBox Width="80" Height="22" Margin="0,0,22,0" x:Name="TextBox_resultB1"></TextBox>
+                    <TextBox Width="80" Height="22" Margin="0,0,22,0" x:Name="lnAB1"></TextBox>
+                    <TextBox Width="80" Height="22" Margin="0,0,20,0" x:Name="lnBA1"></TextBox>
+                    <Button Content="测试" Width="60" Height="23" x:Name="Btntest1" Click="Btntest1_Click"></Button>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" Height="30" Margin="83,99,-83,541">
-                    <Label Margin="0,0,40,0">2</Label>
-                    <ComboBox Width="100" Height="22" HorizontalContentAlignment="Center" SelectedIndex="0" Margin="0,0,47,0" x:Name="ComBox_LED2">
+                <StackPanel Orientation="Horizontal" Height="30" Margin="25,99,-25,541">
+                    <Label Margin="0,0,50,0">2</Label>
+                    <ComboBox Width="100" Height="22" HorizontalContentAlignment="Center" SelectedIndex="0" Margin="0,0,20,0" x:Name="ComBox_LED2">
                         <ComboBoxItem>LED1</ComboBoxItem>
                         <ComboBoxItem>LED2</ComboBoxItem>
                         <ComboBoxItem>LED1-ALED1</ComboBoxItem>
                         <ComboBoxItem>LED2-ALED2</ComboBoxItem>
                     </ComboBox>
-                    <TextBox Width="80" Height="22" Margin="0,0,47,0" x:Name="TextBox_nongdu2"></TextBox>
-                    <TextBox Width="80" Height="22" Margin="0,0,45,0" x:Name="TextBox_DevA2"></TextBox>
-                    <TextBox Width="80" Height="22" Margin="0,0,42,0" x:Name="TextBox_DevB2"></TextBox>
-                    <TextBox Width="80" Height="22" Margin="0,0,45,0" x:Name="TextBox_resultA2"></TextBox>
-                    <TextBox Width="80" Height="22" Margin="0,0,30,0" x:Name="TextBox_resultB2"></TextBox>
-                    <Button Content="测试" Width="80" Height="23" x:Name="Btntest2" Click="Btntest2_Click"></Button>
+                    <TextBox Width="80" Height="22" Margin="0,0,22,0" x:Name="TextBox_nongdu2"></TextBox>
+                    <TextBox Width="80" Height="22" Margin="0,0,22,0" x:Name="TextBox_DevA2"></TextBox>
+                    <TextBox Width="80" Height="22" Margin="0,0,22,0" x:Name="TextBox_DevB2"></TextBox>
+                    <TextBox Width="80" Height="22" Margin="0,0,22,0" x:Name="TextBox_resultA2"></TextBox>
+                    <TextBox Width="80" Height="22" Margin="0,0,22,0" x:Name="TextBox_resultB2"></TextBox>
+                    <TextBox Width="80" Height="22" Margin="0,0,22,0" x:Name="lnAB2"></TextBox>
+                    <TextBox Width="80" Height="22" Margin="0,0,20,0" x:Name="lnBA2"></TextBox>
+                    <Button Content="测试" Width="60" Height="23" x:Name="Btntest2" Click="Btntest2_Click"></Button>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" Height="30" Margin="83,133,-83,507">
-                    <Label Margin="0,0,40,0">3</Label>
-                    <ComboBox Width="100" Height="22" HorizontalContentAlignment="Center" SelectedIndex="0" Margin="0,0,47,0" x:Name="ComBox_LED3">
+                <StackPanel Orientation="Horizontal" Height="30" Margin="25,133,-25,507">
+                    <Label Margin="0,0,50,0">3</Label>
+                    <ComboBox Width="100" Height="22" HorizontalContentAlignment="Center" SelectedIndex="0" Margin="0,0,20,0" x:Name="ComBox_LED3">
                         <ComboBoxItem>LED1</ComboBoxItem>
                         <ComboBoxItem>LED2</ComboBoxItem>
                         <ComboBoxItem>LED1-ALED1</ComboBoxItem>
                         <ComboBoxItem>LED2-ALED2</ComboBoxItem>
                     </ComboBox>
-                    <TextBox Width="80" Height="22" Margin="0,0,47,0" x:Name="TextBox_nongdu3"></TextBox>
-                    <TextBox Width="80" Height="22" Margin="0,0,45,0" x:Name="TextBox_DevA3"></TextBox>
-                    <TextBox Width="80" Height="22" Margin="0,0,42,0" x:Name="TextBox_DevB3"></TextBox>
-                    <TextBox Width="80" Height="22" Margin="0,0,45,0" x:Name="TextBox_resultA3"></TextBox>
-                    <TextBox Width="80" Height="22" Margin="0,0,30,0" x:Name="TextBox_resultB3"></TextBox>
-                    <Button Content="测试" Width="80" Height="23" x:Name="Btntest3" Click="Btntest3_Click"></Button>
+                    <TextBox Width="80" Height="22" Margin="0,0,22,0" x:Name="TextBox_nongdu3"></TextBox>
+                    <TextBox Width="80" Height="22" Margin="0,0,22,0" x:Name="TextBox_DevA3"></TextBox>
+                    <TextBox Width="80" Height="22" Margin="0,0,22,0" x:Name="TextBox_DevB3"></TextBox>
+                    <TextBox Width="80" Height="22" Margin="0,0,22,0" x:Name="TextBox_resultA3"></TextBox>
+                    <TextBox Width="80" Height="22" Margin="0,0,22,0" x:Name="TextBox_resultB3"></TextBox>
+                    <TextBox Width="80" Height="22" Margin="0,0,22,0" x:Name="lnAB3"></TextBox>
+                    <TextBox Width="80" Height="22" Margin="0,0,20,0" x:Name="lnBA3"></TextBox>
+                    <Button Content="测试" Width="60" Height="23" x:Name="Btntest3" Click="Btntest3_Click"></Button>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" Height="30" Margin="83,167,-83,473">
-                    <Label Margin="0,0,40,0">4</Label>
-                    <ComboBox Width="100" Height="22" HorizontalContentAlignment="Center" SelectedIndex="0" Margin="0,0,47,0" x:Name="ComBox_LED4">
+                <StackPanel Orientation="Horizontal" Height="30" Margin="25,167,-25,473">
+                    <Label Margin="0,0,50,0">4</Label>
+                    <ComboBox Width="100" Height="22" HorizontalContentAlignment="Center" SelectedIndex="0" Margin="0,0,20,0" x:Name="ComBox_LED4">
                         <ComboBoxItem>LED1</ComboBoxItem>
                         <ComboBoxItem>LED2</ComboBoxItem>
                         <ComboBoxItem>LED1-ALED1</ComboBoxItem>
                         <ComboBoxItem>LED2-ALED2</ComboBoxItem>
                     </ComboBox>
-                    <TextBox Width="80" Height="22" Margin="0,0,47,0" x:Name="TextBox_nongdu4"></TextBox>
-                    <TextBox Width="80" Height="22" Margin="0,0,45,0" x:Name="TextBox_DevA4"></TextBox>
-                    <TextBox Width="80" Height="22" Margin="0,0,42,0" x:Name="TextBox_DevB4"></TextBox>
-                    <TextBox Width="80" Height="22" Margin="0,0,45,0" x:Name="TextBox_resultA4"></TextBox>
-                    <TextBox Width="80" Height="22" Margin="0,0,30,0" x:Name="TextBox_resultB4"></TextBox>
-                    <Button Content="测试" Width="80" Height="23" x:Name="Btntest4" Click="Btntest4_Click"></Button>
+                    <TextBox Width="80" Height="22" Margin="0,0,22,0" x:Name="TextBox_nongdu4"></TextBox>
+                    <TextBox Width="80" Height="22" Margin="0,0,22,0" x:Name="TextBox_DevA4"></TextBox>
+                    <TextBox Width="80" Height="22" Margin="0,0,22,0" x:Name="TextBox_DevB4"></TextBox>
+                    <TextBox Width="80" Height="22" Margin="0,0,22,0" x:Name="TextBox_resultA4"></TextBox>
+                    <TextBox Width="80" Height="22" Margin="0,0,22,0" x:Name="TextBox_resultB4"></TextBox>
+                    <TextBox Width="80" Height="22" Margin="0,0,22,0" x:Name="lnAB4"></TextBox>
+                    <TextBox Width="80" Height="22" Margin="0,0,20,0" x:Name="lnBA4"></TextBox>
+                    <Button Content="测试" Width="60" Height="23" x:Name="Btntest4" Click="Btntest4_Click"></Button>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" Height="30" Margin="83,202,-83,438">
-                    <Label Margin="0,0,40,0">5</Label>
-                    <ComboBox Width="100" Height="22" HorizontalContentAlignment="Center" SelectedIndex="0" Margin="0,0,47,0" x:Name="ComBox_LED5">
+                <StackPanel Orientation="Horizontal" Height="30" Margin="25,202,-25,438">
+                    <Label Margin="0,0,50,0">5</Label>
+                    <ComboBox Width="100" Height="22" HorizontalContentAlignment="Center" SelectedIndex="0" Margin="0,0,20,0" x:Name="ComBox_LED5">
                         <ComboBoxItem>LED1</ComboBoxItem>
                         <ComboBoxItem>LED2</ComboBoxItem>
                         <ComboBoxItem>LED1-ALED1</ComboBoxItem>
                         <ComboBoxItem>LED2-ALED2</ComboBoxItem>
                     </ComboBox>
-                    <TextBox Width="80" Height="22" Margin="0,0,47,0" x:Name="TextBox_nongdu5"></TextBox>
-                    <TextBox Width="80" Height="22" Margin="0,0,45,0" x:Name="TextBox_DevA5"></TextBox>
-                    <TextBox Width="80" Height="22" Margin="0,0,42,0" x:Name="TextBox_DevB5"></TextBox>
-                    <TextBox Width="80" Height="22" Margin="0,0,45,0" x:Name="TextBox_resultA5"></TextBox>
-                    <TextBox Width="80" Height="22" Margin="0,0,30,0" x:Name="TextBox_resultB5"></TextBox>
-                    <Button Content="测试" Width="80" Height="23" x:Name="Btntest5" Click="Btntest5_Click"></Button>
+                    <TextBox Width="80" Height="22" Margin="0,0,22,0" x:Name="TextBox_nongdu5"></TextBox>
+                    <TextBox Width="80" Height="22" Margin="0,0,22,0" x:Name="TextBox_DevA5"></TextBox>
+                    <TextBox Width="80" Height="22" Margin="0,0,22,0" x:Name="TextBox_DevB5"></TextBox>
+                    <TextBox Width="80" Height="22" Margin="0,0,22,0" x:Name="TextBox_resultA5"></TextBox>
+                    <TextBox Width="80" Height="22" Margin="0,0,22,0" x:Name="TextBox_resultB5"></TextBox>
+                    <TextBox Width="80" Height="22" Margin="0,0,22,0" x:Name="lnAB5"></TextBox>
+                    <TextBox Width="80" Height="22" Margin="0,0,20,0" x:Name="lnBA5"></TextBox>
+                    <Button Content="测试" Width="60" Height="23" x:Name="Btntest5" Click="Btntest5_Click"></Button>
                 </StackPanel>
 
-                <StackPanel Orientation="Horizontal" Height="30" Margin="83,237,-83,403">
-                    <Label Margin="0,0,40,0">6</Label>
-                    <ComboBox Width="100" Height="22" HorizontalContentAlignment="Center" SelectedIndex="0" Margin="0,0,47,0" x:Name="ComBox_LED6">
+                <StackPanel Orientation="Horizontal" Height="30" Margin="25,237,-25,403">
+                    <Label Margin="0,0,50,0">6</Label>
+                    <ComboBox Width="100" Height="22" HorizontalContentAlignment="Center" SelectedIndex="0" Margin="0,0,20,0" x:Name="ComBox_LED6">
                         <ComboBoxItem>LED1</ComboBoxItem>
                         <ComboBoxItem>LED2</ComboBoxItem>
                         <ComboBoxItem>LED1-ALED1</ComboBoxItem>
                         <ComboBoxItem>LED2-ALED2</ComboBoxItem>
                     </ComboBox>
-                    <TextBox Width="80" Height="22" Margin="0,0,47,0" x:Name="TextBox_nongdu6"></TextBox>
-                    <TextBox Width="80" Height="22" Margin="0,0,45,0" x:Name="TextBox_DevA6"></TextBox>
-                    <TextBox Width="80" Height="22" Margin="0,0,42,0" x:Name="TextBox_DevB6"></TextBox>
-                    <TextBox Width="80" Height="22" Margin="0,0,45,0" x:Name="TextBox_resultA6"></TextBox>
-                    <TextBox Width="80" Height="22" Margin="0,0,30,0" x:Name="TextBox_resultB6"></TextBox>
-                    <Button Content="测试" Width="80" Height="23" x:Name="Btntest6" Click="Btntest6_Click"></Button>
+                    <TextBox Width="80" Height="22" Margin="0,0,22,0" x:Name="TextBox_nongdu6"></TextBox>
+                    <TextBox Width="80" Height="22" Margin="0,0,22,0" x:Name="TextBox_DevA6"></TextBox>
+                    <TextBox Width="80" Height="22" Margin="0,0,22,0" x:Name="TextBox_DevB6"></TextBox>
+                    <TextBox Width="80" Height="22" Margin="0,0,22,0" x:Name="TextBox_resultA6"></TextBox>
+                    <TextBox Width="80" Height="22" Margin="0,0,22,0" x:Name="TextBox_resultB6"></TextBox>
+                    <TextBox Width="80" Height="22" Margin="0,0,22,0" x:Name="lnAB6"></TextBox>
+                    <TextBox Width="80" Height="22" Margin="0,0,20,0" x:Name="lnBA6"></TextBox>
+                    <Button Content="测试" Width="60" Height="23" x:Name="Btntest6" Click="Btntest6_Click"></Button>
                 </StackPanel>
 
              
 
-                <StackPanel Orientation="Horizontal" Margin="62,-10,-62,10">
+                <StackPanel Orientation="Horizontal" Margin="42,-10,-42,10">
                     <Label Height="25">X1=</Label>
                     <TextBox Width="90" Height="23" x:Name="X1"></TextBox>
                     <Label Height="25">Y1=</Label>
@@ -901,17 +919,19 @@
                     <Label Margin="0,0,50,0">输入参数</Label>
                     <Label Margin="0,0,30,0">Y=kX+c</Label>
                     <Label>k=</Label>
-                    <TextBox Width="60" Height="23" Margin="0,0,5,0" x:Name="TextBox_k1" MaxLength="3"></TextBox>
+                    <TextBox Width="60" Height="23" Margin="0,0,5,0" x:Name="TextBox_k1" MaxLength="5"></TextBox>
                     <Label Margin="0,0,5,0">.</Label>
                     <TextBox Width="60" Height="23" Margin="0,0,30,0" x:Name="TextBox_k2" MaxLength="3"></TextBox>
                     <Label>c=</Label>
-                    <TextBox Width="60" Height="23" Margin="0,0,5,0" x:Name="TextBox_c1" MaxLength="3"></TextBox>
+                    <TextBox Width="60" Height="23" Margin="0,0,5,0" x:Name="TextBox_c1" MaxLength="5"></TextBox>
                     <Label Margin="0,0,5,0">.</Label>
                     <TextBox Width="60" Height="23" Margin="0,0,30,0" x:Name="TextBox_c2" MaxLength="3"></TextBox>
                     <Label>X=</Label>
                     <ComboBox SelectedIndex="0" Height="23" Margin="0,0,100,0" x:Name="ComBox_Add_Sel">
-                        <ComboBoxItem>A/B</ComboBoxItem>
                         <ComboBoxItem>B/A</ComboBoxItem>
+                        <ComboBoxItem>A/B</ComboBoxItem>
+                        <ComboBoxItem>ln(B/A)</ComboBoxItem>
+                        <ComboBoxItem>ln(A/B)</ComboBoxItem>
                     </ComboBox>
                 <Button Content="保存" Width="100" Height="23" x:Name="Btn_Add_Save" Click="Btn_Add_Save_Click"></Button>
                 </StackPanel>
